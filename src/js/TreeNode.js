@@ -21,17 +21,15 @@ class TreeNode extends React.PureComponent {
         optimisticToggle: PropTypes.bool.isRequired,
         showNodeIcon: PropTypes.bool.isRequired,
         treeId: PropTypes.string.isRequired,
-        value: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.number,
-        ]).isRequired,
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+            .isRequired,
         onCheck: PropTypes.func.isRequired,
         onExpand: PropTypes.func.isRequired,
-
         children: PropTypes.node,
         className: PropTypes.string,
         expandOnClick: PropTypes.bool,
         icon: PropTypes.node,
+        selected: PropTypes.bool,
         showCheckbox: PropTypes.bool,
         title: PropTypes.string,
         onClick: PropTypes.func,
@@ -42,6 +40,7 @@ class TreeNode extends React.PureComponent {
         className: null,
         expandOnClick: false,
         icon: null,
+        selected: false,
         showCheckbox: true,
         title: null,
         onClick: () => {},
@@ -81,12 +80,7 @@ class TreeNode extends React.PureComponent {
     }
 
     onClick() {
-        const {
-            expandOnClick,
-            isParent,
-            value,
-            onClick,
-        } = this.props;
+        const { expandOnClick, isParent, value, onClick } = this.props;
 
         // Auto expand if enabled
         if (isParent && expandOnClick) {
@@ -128,15 +122,15 @@ class TreeNode extends React.PureComponent {
 
         if (isLeaf) {
             return (
-                <span className="rct-collapse">
-                    <span className="rct-icon" />
+                <span className='rct-collapse'>
+                    <span className='rct-icon' />
                 </span>
             );
         }
 
         return (
             <Button
-                className="rct-collapse rct-collapse-btn"
+                className='rct-collapse rct-collapse-btn'
                 disabled={expandDisabled}
                 title={lang.toggle}
                 onClick={this.onExpand}
@@ -147,7 +141,10 @@ class TreeNode extends React.PureComponent {
     }
 
     renderCollapseIcon() {
-        const { expanded, icons: { expandClose, expandOpen } } = this.props;
+        const {
+            expanded,
+            icons: { expandClose, expandOpen },
+        } = this.props;
 
         if (!expanded) {
             return expandClose;
@@ -157,7 +154,10 @@ class TreeNode extends React.PureComponent {
     }
 
     renderCheckboxIcon() {
-        const { checked, icons: { uncheck, check, halfCheck } } = this.props;
+        const {
+            checked,
+            icons: { uncheck, check, halfCheck },
+        } = this.props;
 
         if (checked === 0) {
             return uncheck;
@@ -198,35 +198,30 @@ class TreeNode extends React.PureComponent {
         const clickable = onClick !== null;
 
         return (
-            <span className="rct-bare-label" title={title}>
+            <span className='rct-bare-label' title={title}>
                 {clickable ? (
                     <span
-                        className="rct-node-clickable"
+                        className='rct-node-clickable'
                         onClick={this.onClick}
                         onKeyPress={this.onClick}
-                        role="button"
+                        role='button'
                         tabIndex={0}
                     >
                         {children}
                     </span>
-                ) : children}
+                ) : (
+                    children
+                )}
             </span>
         );
     }
 
     renderCheckboxLabel(children) {
-        const {
-            checked,
-            disabled,
-            title,
-            treeId,
-            value,
-            onClick,
-        } = this.props;
+        const { checked, disabled, title, treeId, value, onClick } = this.props;
         const clickable = onClick !== null;
         const inputId = `${treeId}-${String(value).split(' ').join('_')}`;
 
-        const render = [(
+        const render = [
             <label key={0} htmlFor={inputId} title={title}>
                 <NativeCheckbox
                     checked={checked === 1}
@@ -239,8 +234,8 @@ class TreeNode extends React.PureComponent {
                 <span
                     aria-checked={checked === 1}
                     aria-disabled={disabled}
-                    className="rct-checkbox"
-                    role="checkbox"
+                    className='rct-checkbox'
+                    role='checkbox'
                     tabIndex={0}
                     onKeyPress={this.onCheckboxKeyPress}
                     onKeyUp={this.onCheckboxKeyUp}
@@ -248,22 +243,22 @@ class TreeNode extends React.PureComponent {
                     {this.renderCheckboxIcon()}
                 </span>
                 {!clickable ? children : null}
-            </label>
-        )];
+            </label>,
+        ];
 
         if (clickable) {
-            render.push((
+            render.push(
                 <span
                     key={1}
-                    className="rct-node-clickable"
+                    className='rct-node-clickable'
                     onClick={this.onClick}
                     onKeyPress={this.onClick}
-                    role="link"
+                    role='link'
                     tabIndex={0}
                 >
                     {children}
-                </span>
-            ));
+                </span>,
+            );
         }
 
         return render;
@@ -273,11 +268,11 @@ class TreeNode extends React.PureComponent {
         const { label, showCheckbox, showNodeIcon } = this.props;
         const labelChildren = [
             showNodeIcon ? (
-                <span key={0} className="rct-node-icon">
+                <span key={0} className='rct-node-icon'>
                     {this.renderNodeIcon()}
                 </span>
             ) : null,
-            <span key={1} className="rct-title">
+            <span key={1} className='rct-title'>
                 {label}
             </span>,
         ];
@@ -298,24 +293,31 @@ class TreeNode extends React.PureComponent {
     }
 
     render() {
-        const {
+        const { className, disabled, expanded, isLeaf, onClick, selected } =
+            this.props;
+        const nodeClass = classNames(
+            {
+                'rct-node': true,
+                'rct-node-leaf': isLeaf,
+                'rct-node-parent': !isLeaf,
+                'rct-node-expanded': !isLeaf && expanded,
+                'rct-node-collapsed': !isLeaf && !expanded,
+                'rct-disabled': disabled,
+                'rct-node-selected': selected,
+            },
             className,
-            disabled,
-            expanded,
-            isLeaf,
-        } = this.props;
-        const nodeClass = classNames({
-            'rct-node': true,
-            'rct-node-leaf': isLeaf,
-            'rct-node-parent': !isLeaf,
-            'rct-node-expanded': !isLeaf && expanded,
-            'rct-node-collapsed': !isLeaf && !expanded,
-            'rct-disabled': disabled,
-        }, className);
+        );
+
+        const isClickable = onClick !== null;
 
         return (
             <li className={nodeClass}>
-                <span className="rct-text">
+                <span
+                    className={classNames({
+                        'rct-text': true,
+                        clickable: isClickable,
+                    })}
+                >
                     {this.renderCollapseButton()}
                     {this.renderLabel()}
                 </span>

@@ -59,6 +59,7 @@ class NodeModel {
                 isChild: parent.value !== undefined,
                 isParent,
                 isLeaf: !isParent,
+                selected: node.selected,
                 showCheckbox: node.showCheckbox !== undefined ? node.showCheckbox : true,
                 disabled: this.getDisabledState(node, parent, disabled, noCascade),
                 treeDepth: depth,
