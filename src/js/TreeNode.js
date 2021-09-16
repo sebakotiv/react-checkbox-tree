@@ -29,9 +29,11 @@ class TreeNode extends React.PureComponent {
         className: PropTypes.string,
         expandOnClick: PropTypes.bool,
         icon: PropTypes.node,
+        rightComponent: PropTypes.node,
         selected: PropTypes.bool,
         showCheckbox: PropTypes.bool,
         title: PropTypes.string,
+
         onClick: PropTypes.func,
     };
 
@@ -43,6 +45,7 @@ class TreeNode extends React.PureComponent {
         selected: false,
         showCheckbox: true,
         title: null,
+        rightComponent: null,
         onClick: () => {},
     };
 
@@ -293,8 +296,14 @@ class TreeNode extends React.PureComponent {
     }
 
     render() {
-        const { className, disabled, expanded, isLeaf, onClick, selected } =
-            this.props;
+        const {
+            className,
+            disabled,
+            expanded,
+            isLeaf,
+            selected,
+            rightComponent,
+        } = this.props;
         const nodeClass = classNames(
             {
                 'rct-node': true,
@@ -308,18 +317,16 @@ class TreeNode extends React.PureComponent {
             className,
         );
 
-        const isClickable = onClick !== null;
-
         return (
             <li className={nodeClass}>
                 <span
                     className={classNames({
                         'rct-text': true,
-                        clickable: isClickable,
                     })}
                 >
                     {this.renderCollapseButton()}
                     {this.renderLabel()}
+                    {rightComponent}
                 </span>
                 {this.renderChildren()}
             </li>

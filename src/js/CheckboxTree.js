@@ -17,7 +17,6 @@ import nodeShape from './shapes/nodeShape';
 class CheckboxTree extends React.Component {
     static propTypes = {
         nodes: PropTypes.arrayOf(nodeShape).isRequired,
-
         checkModel: PropTypes.oneOf([
             constants.CheckModel.LEAF,
             constants.CheckModel.ALL,
@@ -291,6 +290,7 @@ class CheckboxTree extends React.Component {
                     }
                     treeId={id}
                     value={node.value}
+                    rightComponent={node.rightComponent}
                     onCheck={this.onCheck}
                     onClick={onClick && this.onNodeClick}
                     onExpand={this.onExpand}
