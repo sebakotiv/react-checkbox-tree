@@ -20,12 +20,7 @@ const banner = '/*! <%= pkg.name %> - v<%= pkg.version %> | <%= new Date().getFu
 const browserSync = browserSyncImport.create();
 
 gulp.task('test-script-format', () => (
-    gulp.src([
-        './examples/src/**/*.js',
-        './src/**/*.js',
-        './test/**/*.js',
-        './*.js',
-    ])
+    gulp.src(['./src/**/*.js'])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failOnError())
