@@ -86,18 +86,8 @@ const nodes = [
 
 class HiddenCheckboxesExample extends React.Component {
     state = {
-        checked: [
-            'persian',
-            'spqr',
-            'byzantine',
-            'holy-roman',
-            'inca',
-        ],
-        expanded: [
-            'favorite-empires',
-            'classical-era',
-            'medieval-era',
-        ],
+        checked: ['persian', 'spqr', 'byzantine', 'holy-roman', 'inca'],
+        expanded: ['favorite-empires', 'classical-era', 'medieval-era'],
     };
 
     constructor(props) {
@@ -122,7 +112,7 @@ class HiddenCheckboxesExample extends React.Component {
             <CheckboxTree
                 checked={checked}
                 expanded={expanded}
-                iconsClass="fa5"
+                iconsClass='fa5'
                 nodes={nodes}
                 onlyLeafCheckboxes
                 onCheck={this.onCheck}

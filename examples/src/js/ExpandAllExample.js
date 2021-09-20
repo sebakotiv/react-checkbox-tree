@@ -13,10 +13,12 @@ const nodes = [
                     {
                         value: '/app/Http/Controllers',
                         label: 'Controllers',
-                        children: [{
-                            value: '/app/Http/Controllers/WelcomeController.js',
-                            label: 'WelcomeController.js',
-                        }],
+                        children: [
+                            {
+                                value: '/app/Http/Controllers/WelcomeController.js',
+                                label: 'WelcomeController.js',
+                            },
+                        ],
                     },
                     {
                         value: '/app/Http/routes.js',
@@ -27,10 +29,12 @@ const nodes = [
             {
                 value: '/app/Providers',
                 label: 'Providers',
-                children: [{
-                    value: '/app/Providers/EventServiceProvider.js',
-                    label: 'EventServiceProvider.js',
-                }],
+                children: [
+                    {
+                        value: '/app/Providers/EventServiceProvider.js',
+                        label: 'EventServiceProvider.js',
+                    },
+                ],
             },
         ],
     },
@@ -55,10 +59,12 @@ const nodes = [
             {
                 value: '/public/assets/',
                 label: 'assets',
-                children: [{
-                    value: '/public/assets/style.css',
-                    label: 'style.css',
-                }],
+                children: [
+                    {
+                        value: '/public/assets/style.css',
+                        label: 'style.css',
+                    },
+                ],
             },
             {
                 value: '/public/index.html',
@@ -89,9 +95,7 @@ class ExpandAllExample extends React.Component {
             '/public/index.html',
             '/.gitignore',
         ],
-        expanded: [
-            '/app',
-        ],
+        expanded: ['/app'],
     };
 
     constructor(props) {
@@ -113,11 +117,11 @@ class ExpandAllExample extends React.Component {
         const { checked, expanded } = this.state;
 
         return (
-            <div className="expand-all-container">
+            <div className='expand-all-container'>
                 <CheckboxTree
                     checked={checked}
                     expanded={expanded}
-                    iconsClass="fa5"
+                    iconsClass='fa5'
                     nodes={nodes}
                     showExpandAll
                     onCheck={this.onCheck}

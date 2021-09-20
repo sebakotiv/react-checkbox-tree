@@ -9,17 +9,17 @@ const nodes = [
             {
                 value: 'Employee Evaluations.zip',
                 label: 'Employee Evaluations.zip',
-                icon: <i className="far fa-file-archive" />,
+                icon: <i className='far fa-file-archive' />,
             },
             {
                 value: 'Expense Report.pdf',
                 label: 'Expense Report.pdf',
-                icon: <i className="far fa-file-pdf" />,
+                icon: <i className='far fa-file-pdf' />,
             },
             {
                 value: 'notes.txt',
                 label: 'notes.txt',
-                icon: <i className="far fa-file-alt" />,
+                icon: <i className='far fa-file-alt' />,
             },
         ],
     },
@@ -30,12 +30,12 @@ const nodes = [
             {
                 value: 'nyan-cat.gif',
                 label: 'nyan-cat.gif',
-                icon: <i className="far fa-file-image" />,
+                icon: <i className='far fa-file-image' />,
             },
             {
                 value: 'SpaceX Falcon9 liftoff.jpg',
                 label: 'SpaceX Falcon9 liftoff.jpg',
-                icon: <i className="far fa-file-image" />,
+                icon: <i className='far fa-file-image' />,
             },
         ],
     },
@@ -44,9 +44,7 @@ const nodes = [
 class CustomIconsExamples extends React.Component {
     state = {
         checked: [],
-        expanded: [
-            'Documents',
-        ],
+        expanded: ['Documents'],
     };
 
     constructor(props) {
@@ -71,7 +69,7 @@ class CustomIconsExamples extends React.Component {
             <CheckboxTree
                 checked={checked}
                 expanded={expanded}
-                iconsClass="fa5"
+                iconsClass='fa5'
                 nodes={nodes}
                 onCheck={this.onCheck}
                 onExpand={this.onExpand}

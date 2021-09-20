@@ -13,10 +13,12 @@ const nodes = [
                     {
                         value: '/app/Http/Controllers',
                         label: 'Controllers',
-                        children: [{
-                            value: '/app/Http/Controllers/WelcomeController.js',
-                            label: 'WelcomeController.js',
-                        }],
+                        children: [
+                            {
+                                value: '/app/Http/Controllers/WelcomeController.js',
+                                label: 'WelcomeController.js',
+                            },
+                        ],
                     },
                     {
                         value: '/app/Http/routes.js',
@@ -27,10 +29,12 @@ const nodes = [
             {
                 value: '/app/Providers',
                 label: 'Providers',
-                children: [{
-                    value: '/app/Http/Providers/EventServiceProvider.js',
-                    label: 'EventServiceProvider.js',
-                }],
+                children: [
+                    {
+                        value: '/app/Http/Providers/EventServiceProvider.js',
+                        label: 'EventServiceProvider.js',
+                    },
+                ],
             },
         ],
     },
@@ -55,10 +59,12 @@ const nodes = [
             {
                 value: '/public/assets/',
                 label: 'assets',
-                children: [{
-                    value: '/public/assets/style.css',
-                    label: 'style.css',
-                }],
+                children: [
+                    {
+                        value: '/public/assets/style.css',
+                        label: 'style.css',
+                    },
+                ],
             },
             {
                 value: '/public/index.html',
@@ -89,9 +95,7 @@ class FilterExample extends React.Component {
             '/public/index.html',
             '/.gitignore',
         ],
-        expanded: [
-            '/app',
-        ],
+        expanded: ['/app'],
         filterText: '',
         nodesFiltered: nodes,
         nodes,
@@ -122,16 +126,16 @@ class FilterExample extends React.Component {
     filterTree() {
         // Reset nodes back to unfiltered state
         if (!this.state.filterText) {
-            this.setState((prevState) => ({
+            this.setState(prevState => ({
                 nodesFiltered: prevState.nodes,
             }));
 
             return;
         }
 
-        const nodesFiltered = (prevState) => (
-            { nodesFiltered: prevState.nodes.reduce(this.filterNodes, []) }
-        );
+        const nodesFiltered = prevState => ({
+            nodesFiltered: prevState.nodes.reduce(this.filterNodes, []),
+        });
 
         this.setState(nodesFiltered);
     }
@@ -142,7 +146,9 @@ class FilterExample extends React.Component {
 
         if (
             // Node's label matches the search string
-            node.label.toLocaleLowerCase().indexOf(filterText.toLocaleLowerCase()) > -1 ||
+            node.label
+                .toLocaleLowerCase()
+                .indexOf(filterText.toLocaleLowerCase()) > -1 ||
             // Or a children has a matching node
             children.length
         ) {
@@ -153,26 +159,21 @@ class FilterExample extends React.Component {
     }
 
     render() {
-        const {
-            checked,
-            expanded,
-            filterText,
-            nodesFiltered,
-        } = this.state;
+        const { checked, expanded, filterText, nodesFiltered } = this.state;
 
         return (
-            <div className="filter-container">
+            <div className='filter-container'>
                 <input
-                    className="filter-text"
-                    placeholder="Search..."
-                    type="text"
+                    className='filter-text'
+                    placeholder='Search...'
+                    type='text'
                     value={filterText}
                     onChange={this.onFilterChange}
                 />
                 <CheckboxTree
                     checked={checked}
                     expanded={expanded}
-                    iconsClass="fa5"
+                    iconsClass='fa5'
                     nodes={nodesFiltered}
                     onCheck={this.onCheck}
                     onExpand={this.onExpand}

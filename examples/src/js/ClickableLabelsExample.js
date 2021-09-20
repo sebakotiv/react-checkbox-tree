@@ -13,10 +13,12 @@ const nodes = [
                     {
                         value: '/app/Http/Controllers',
                         label: 'Controllers',
-                        children: [{
-                            value: '/app/Http/Controllers/WelcomeController.js',
-                            label: 'WelcomeController.js',
-                        }],
+                        children: [
+                            {
+                                value: '/app/Http/Controllers/WelcomeController.js',
+                                label: 'WelcomeController.js',
+                            },
+                        ],
                     },
                     {
                         value: '/app/Http/routes.js',
@@ -27,10 +29,12 @@ const nodes = [
             {
                 value: '/app/Providers',
                 label: 'Providers',
-                children: [{
-                    value: '/app/Providers/EventServiceProvider.js',
-                    label: 'EventServiceProvider.js',
-                }],
+                children: [
+                    {
+                        value: '/app/Providers/EventServiceProvider.js',
+                        label: 'EventServiceProvider.js',
+                    },
+                ],
             },
         ],
     },
@@ -55,10 +59,12 @@ const nodes = [
             {
                 value: '/public/assets/',
                 label: 'assets',
-                children: [{
-                    value: '/public/assets/style.css',
-                    label: 'style.css',
-                }],
+                children: [
+                    {
+                        value: '/public/assets/style.css',
+                        label: 'style.css',
+                    },
+                ],
             },
             {
                 value: '/public/index.html',
@@ -90,9 +96,7 @@ class ClickExample extends React.Component {
             '/public/index.html',
             '/.gitignore',
         ],
-        expanded: [
-            '/app',
-        ],
+        expanded: ['/app'],
         clicked: {},
     };
 
@@ -121,19 +125,20 @@ class ClickExample extends React.Component {
         const notClickedText = '(none)';
 
         return (
-            <div className="clickable-labels">
+            <div className='clickable-labels'>
                 <CheckboxTree
                     checked={checked}
                     expanded={expanded}
-                    iconsClass="fa5"
+                    iconsClass='fa5'
                     nodes={nodes}
                     expandOnClick
                     onCheck={this.onCheck}
                     onClick={this.onClick}
                     onExpand={this.onExpand}
                 />
-                <div className="clickable-labels-info">
-                    <strong>Clicked Node</strong>: {clicked.value || notClickedText}
+                <div className='clickable-labels-info'>
+                    <strong>Clicked Node</strong>:{' '}
+                    {clicked.value || notClickedText}
                 </div>
             </div>
         );

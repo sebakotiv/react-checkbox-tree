@@ -20,11 +20,13 @@ for (let i = 0; i < 100; i += 1) {
     });
 }
 
-const nodes = [{
-    value: 'node-0',
-    label: 'Node 0',
-    children: parents,
-}];
+const nodes = [
+    {
+        value: 'node-0',
+        label: 'Node 0',
+        children: parents,
+    },
+];
 
 class LargeDataExample extends React.Component {
     state = {
@@ -54,7 +56,7 @@ class LargeDataExample extends React.Component {
             <CheckboxTree
                 checked={checked}
                 expanded={expanded}
-                iconsClass="fa5"
+                iconsClass='fa5'
                 nodes={nodes}
                 onCheck={this.onCheck}
                 onExpand={this.onExpand}
